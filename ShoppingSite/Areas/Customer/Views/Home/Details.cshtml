@@ -1,0 +1,104 @@
+﻿@model ShoppingSite.Models.ShoppingCart
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <br />
+    <div class="row">
+         <form method="post">
+             <input type="hidden" asp-for="ProductId" />
+            <div class="card mb-12">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="@Model.Product.Image" class="img-fluid rounded-start" alt="..." style="height:300px">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-3">
+                                    Stok
+                                </dt>
+                                <dd class="col-sm-9">
+                                    @if(Model.Product.IsStock)
+                                    {
+                                        <label>Var</label>
+                                    }
+                                    else
+                                    {
+                                        <label>Yok</label>
+                                    }
+                                </dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-sm-3">
+                                    Ürün Adı
+                                </dt>
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.Product.Name)
+                                </dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-sm-3">
+                                    Açıklama
+                                </dt>
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.Product.Description)
+                                </dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-sm-3">
+                                    Fiyat
+                                </dt>
+                                <dd class="col-sm-9">
+                                    @Html.DisplayFor(model => model.Product.Price) TL
+                                </dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-sm-3">
+                                    Adet
+                                </dt>
+                                <dd class="col-sm-9">
+                                    <input asp-for="Count" class="form-control"/>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-3">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-primary form-control">
+                            <i class="bi bi-house"></i>
+                            Anasayfa
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-3">
+                        @if (Model.Product.IsStock)
+                        {
+                            <button class="btn btn-warning form-control">
+                                <i class="bi bi-cart4"></i>
+                                Sepete ekle
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger form-control">
+                                <i class="bi bi-cart4"></i>
+                                Ürün Tükendi
+                            </button>
+                        }
+
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                </div>
+                </div>
+         </form>   
+    </div>
+</div>
+
+

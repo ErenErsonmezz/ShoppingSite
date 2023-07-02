@@ -1,0 +1,60 @@
+﻿@model ShoppingSite.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Detaylar</h1>
+
+<div>
+    <h4>Ürün</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Ürün Adı
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            Açıklama
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            Fiyat
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            Resim Yolu
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+        <dt class = "col-sm-2">
+            Anasayfa
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsHome)
+        </dd>
+        <dt class = "col-sm-2">
+            Stok
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsStock)
+        </dd>
+        <dt class = "col-sm-2">
+            Kategori
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-success">Listeye Geri Dön</a>
+</div>

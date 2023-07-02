@@ -1,0 +1,132 @@
+﻿@model ShoppingSite.Models.ShoppingCartWithOrderModel
+@{
+    ViewData["Title"] = "Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+     <div class="container">
+         <div class="card">
+             <div class="card-body">
+                 <div class="row">
+                     <div class="col-md-6">
+                        <div class="mb-3 row">
+                            <label for="inputName" class="col-sm-3 col-form-label">Adınız</label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="OrderHeader.Name" class="form-control" id="inputName">
+                                <span asp-validation-for="OrderHeader.Name"></span>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputName" class="col-sm-3 col-form-label">Soyadınız</label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="OrderHeader.Surname" class="form-control" id="inputName">
+                                <span asp-validation-for="OrderHeader.Surname" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputName" class="col-sm-3 col-form-label">Adres</label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="OrderHeader.Address" class="form-control" id="inputName">
+                                <span asp-validation-for="OrderHeader.Address"></span>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputName" class="col-sm-3 col-form-label">Şehir</label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="OrderHeader.City" class="form-control" id="inputName">
+                                <span asp-validation-for="OrderHeader.City"></span>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputName" class="col-sm-3 col-form-label">Semt</label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="OrderHeader.Region" class="form-control" id="inputName">
+                                <span asp-validation-for="OrderHeader.Region"></span>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputName" class="col-sm-3 col-form-label">Telefon</label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="OrderHeader.Phone" class="form-control" id="inputName">
+                                <span asp-validation-for="OrderHeader.Phone"></span>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="inputName" class="col-sm-3 col-form-label">Posta Kodu</label>
+                            <div class="col-sm-9">
+                                <input type="text" asp-for="OrderHeader.PostalCode" class="form-control" id="inputName">
+                                <span asp-validation-for="OrderHeader.PostalCode"></span>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="col-md-6 order-md-2 mb-4">
+                            <ul class="list-group mb-3">
+                            @foreach(var item in Model.Carts)
+                            {
+                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <div>
+                                        <h6 class="my-0">@item.Product.Name</h6>
+                                        <small class="text-muted">Adet:@item.Count</small>
+                                    </div>
+                                    <span class="text-muted">@(item.Count*item.Product.Price) TL</span>
+                                </li>
+                            }
+                            <br />
+                            <div class="mb-3 row">
+                                <label for="inputName" class="col-sm-3 col-form-label">Kart İsmi</label>
+                                <div class="col-sm-9">
+                                    <input type="text" asp-for="OrderHeader.CartName" class="form-control" id="inputName">
+                                    <span asp-validation-for="OrderHeader.CartName"></span>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputName" class="col-sm-3 col-form-label">Kart Numarası</label>
+                                <div class="col-sm-9">
+                                    <input type="text" asp-for="OrderHeader.CartNumber" class="form-control" id="inputName">
+                                    <span asp-validation-for="OrderHeader.CartNumber"></span>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputName" class="col-sm-3 col-form-label">Son kullanma Tarihi</label>
+                                <div class="col-sm-4">
+                                    <input type="text" asp-for="OrderHeader.ExpirationMonth" class="form-control"  placeholder="Ay">
+                                    <span asp-validation-for="OrderHeader.ExpirationMonth"></span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" asp-for="OrderHeader.ExpirationYear" class="form-control" placeholder="Yıl">
+                                    <span asp-validation-for="OrderHeader.ExpirationYear"></span>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputName" class="col-sm-3 col-form-label">Güvenlik Kodu</label>
+                                <div class="col-sm-9">
+                                    <input type="number" asp-for="OrderHeader.Cvc" class="form-control" id="inputName">
+                                    <span asp-validation-for="OrderHeader.Cvc"></span>
+                                </div>
+                            </div>
+                                <li class="list-group-item d-flex justify-content-between text-success">
+                                    <span><b>TOPLAM TUTAR:</b></span>
+                                    <strong>@Model.OrderHeader.OrderTotal TL</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+             </div>
+             <div class="card-footer">
+                 <div class="row">
+                     <div class="col-md-6">
+
+                     </div>
+                     <div class="col-md-6">
+                         <button type="submit" class="btn btn-success form-control">Siparişi Tamamla</button>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+        
+}

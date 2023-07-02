@@ -1,0 +1,99 @@
+﻿@model ShoppingSite.Models.OrderDetailsViewModel
+@{
+    ViewData["Title"] = "OrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    <input type="hidden" asp-for="OrderHeader.Id" />
+    <div class="container">
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        Ad
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.OrderHeader.Name
+                    </dd>
+                    <dt class="col-sm-3">
+                        Soyad
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.OrderHeader.Surname
+                    </dd>
+                    <dt class="col-sm-3">
+                        Telefon
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.OrderHeader.Phone
+                    </dd>
+                    <dt class="col-sm-3">
+                        Adres
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.OrderHeader.Address
+                    </dd>
+                    <dt class="col-sm-3">
+                        Semt
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.OrderHeader.Region
+                    </dd>
+                    <dt class="col-sm-3">
+                        Şehir
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.OrderHeader.City
+                    </dd>
+                    <dt class="col-sm-3">
+                        Posta Kodu
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.OrderHeader.PostalCode
+                    </dd>
+                    <dt class="col-sm-3">
+                        Sipariş Tarihi
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.OrderHeader.OrderDate
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                @foreach (var item in Model.OrderDetails)
+                {
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">@item.Product.Name</h6>
+                            <small class="text-muted">Adet:@item.Count</small>
+                        </div>
+                        <span class="text-muted">@(item.Count * item.Product.Price) TL</span>
+                    </li>
+                }
+                <br />
+                @if(User.IsInRole(ApplicationRole.Admin))
+                {
+                    
+                    switch (Model.OrderHeader.OrderStatus)
+                    {
+                        case "Sipariş Onaylanmayı Bekliyor":
+                            <a asp-action="Approve" asp-route-id="@Model.OrderHeader.Id" class="btn btn-success">Siparişi Onayla</a>
+                            break;
+                        case "Sipariş Hazırlanıyor":
+                            <a asp-action="Shipped" asp-route-id="@Model.OrderHeader.Id" class="btn btn-success">Siparişi Kargoya Ver</a>
+                            break;
+                        case "Sipariş Kargolandı":
+                            <label class="btn btn-success">Sipariş Kargoya Verildi</label>
+                            break;
+
+                    }
+
+                }
+               
+            </div>
+        </div>
+    </div>
+</form>
+

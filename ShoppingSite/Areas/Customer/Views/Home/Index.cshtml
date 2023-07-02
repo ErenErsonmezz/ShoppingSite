@@ -1,0 +1,32 @@
+﻿@using ShoppingSite.Models
+@model List<Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container">
+    <div class="row">
+        @await Component.InvokeAsync("CategoryList")
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        @item.Name
+                    </div>
+                    <img class="card-img-top" src="@item.Image" alt="Card image cap" style="height:200px">
+                    <div class="card-body">
+                        <p class="card-text">@item.Description.Substring(0,45)</p>
+                    </div>
+                    <div class="card-footer">
+                        <label style="font-size:20px;color:red">@item.Price TL</label>
+                        <a href="/Customer/Home/Details/@item.Id" style="float:right" class="btn btn-warning">Detaylar</a>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
